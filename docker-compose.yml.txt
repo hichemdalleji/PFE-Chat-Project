@@ -1,0 +1,43 @@
+version: '3.2'
+services:
+  mongoDB:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+      - mongo-conf:/etc/mongod.conf
+  chatproject:
+    image: hichemdalleji/pfe-chat:1.0.2
+    restart: always
+    ports:
+      - 9200:9200
+      - 8080:8080
+    environment:
+      - "Database=mongodb://mongoDB/chatproject?authSource=admin"
+      - "ME_CONFIG_MONGODB_PORT=27017"
+      - "ME_CONFIG_MONGODB_SERVER=mongoDB"
+    volumes:
+      - mongo-data:/data/db
+      - mongo-conf:/etc/mongod.conf
+    links:
+      - mongoDB
+    depends_on:
+      - mongoDB
+      - mongo-express
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      - "ME_CONFIG_MONGODB_PORT=27017"
+      - "ME_CONFIG_MONGODB_SERVER=mongoDB"
+    links:
+      - mongoDB
+    depends_on:
+      - mongoDB
+volumes:
+  mongo-data:
+    driver: local
+  mongo-conf:
