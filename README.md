@@ -2,4 +2,3 @@
 My Bachelor's end of study project
 .
 .
-.
