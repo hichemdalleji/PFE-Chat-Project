@@ -18,8 +18,8 @@ pipeline {
             steps {
                 script {
                     echo 'incrementing app version...'
-                    sh 'npm version patch --no-git-tag-version' //other options are "major" or "minor"
-                    sh 'npm version > version.txt'
+                    sh 'npm version patch --no-git-tag-version > version.txt' //other options are "major" or "minor"
+                    //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
                     def version = sh 'cat version.txt'
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
