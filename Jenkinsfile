@@ -1,12 +1,12 @@
 #!/usr/bin/env groovy
 
-library identifier: 'Jenkins-Shared-Library@master', retriever: modernSCM(
+/*library identifier: 'Jenkins-Shared-Library@master', retriever: modernSCM(
     [$class: 'GitSCMSource',
      remote: 'git@github.com:hichemdalleji/Jenkins-Shared-Library.git',
      credentialsId: 'github-shared-lib'
     ]
-) 
-
+)*/ 
+@Library ('jenkins-shared-lib')_ //If the library is global
 pipeline {
     agent any
     tools {
