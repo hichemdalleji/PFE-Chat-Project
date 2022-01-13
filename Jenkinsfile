@@ -6,7 +6,7 @@
      credentialsId: 'github-shared-lib'
     ]
 )*/ 
-@Library ('jenkins-shared-lib')_ //If the library is global
+@Library ('jenkins-shared-lib')_ //If the library is global , underscore is added to separate lib from pipeline 
 pipeline {
     agent any
     tools {
