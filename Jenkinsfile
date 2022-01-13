@@ -2,8 +2,8 @@
 
 /*library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
     [$class: 'GitSCMSource',
-     remote: 'add remote here',
-     credentialsId: 'gitlab-credentials'
+     remote: 'git@github.com:hichemdalleji/Jenkins-Shared-Library.git',
+     credentialsId: 'github-credentials'
     ]
 ) */
 
@@ -23,6 +23,7 @@ pipeline {
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
                     def version = sh 'cat version.txt'
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    sh "echo ${IMAGE_NAME}" 
                 }
             }
         }
@@ -64,7 +65,7 @@ pipeline {
         stage('commit version update') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     // git config here for the first time run
                     sh 'git config --global user.email "jenkins@example.com"'
                     sh 'git config --global user.name "jenkins"'
