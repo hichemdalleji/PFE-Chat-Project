@@ -28,14 +28,14 @@ pipeline {
             }
         }
 
-        stage('build app') {
+        /*stage('build app') {
             steps {
                script {
                   echo 'building the chat app...'
                   buildNpm()
                }
             }
-        }
+        }*/
         stage('build image') {
             steps {
                 script {
