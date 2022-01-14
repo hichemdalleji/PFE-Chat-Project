@@ -42,11 +42,18 @@ pipeline {
                    echo 'building docker image...'
                    buildImage(env.IMAGE_NAME)
                    dockerLogin()
+                }
+            }
+        }
+              stage('push image') {
+            steps {
+                script {
+                   echo 'pushing docker image...'
                    dockerPush(env.IMAGE_NAME)
                 }
             }
         }
-        stage('deploy to EC2') {
+        /*stage('deploy to EC2') {
             steps {
                 script {
                    echo 'deploying docker image to EC2...'
@@ -60,7 +67,7 @@ pipeline {
                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
                    }
                 }
-            }
+            }*/
         }
         stage('commit version update') {
             steps {
