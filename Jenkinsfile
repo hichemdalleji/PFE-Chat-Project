@@ -6,7 +6,7 @@
      credentialsId: 'github-shared-lib'
     ]
 )*/ 
-@Library ('jenkins-shared-lib')_ //If the library is global , underscore is added to separate lib from pipeline 
+@Library ('jenkins-shared-lib')_ //If the library is global, underscore is added to separate lib from pipeline 
 pipeline {
     agent any
     tools {
@@ -67,8 +67,8 @@ pipeline {
                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
                    }
                 }
-            }*/
-        }
+            }
+        }*/
         stage('commit version update') {
             steps {
                 script {
