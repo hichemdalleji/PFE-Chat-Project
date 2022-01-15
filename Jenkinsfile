@@ -22,7 +22,7 @@ pipeline {
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
                     def version = sh 'cat version.txt'
-                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    env.IMAGE_NAME = "pfe-chat$version-$BUILD_NUMBER"
                     sh "echo ${IMAGE_NAME}" 
                 }
             }
