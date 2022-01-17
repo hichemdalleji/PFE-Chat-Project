@@ -21,7 +21,7 @@ pipeline {
                     sh 'npm version major --no-git-tag-version' //other options are "major" or "minor"
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
-                    def version = sh 'grep version package.json | sed 's/.*"version": "\(.*\)".*/\1/''
+                    def version = sh 'node -p -e "require('./package.json').version"'
                     env.IMAGE_NAME = "hichemdalleji/pfe-chat-app:$version-$BUILD_NUMBER"
                     sh "echo ${IMAGE_NAME}" 
                 }
