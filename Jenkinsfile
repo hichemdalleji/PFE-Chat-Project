@@ -55,7 +55,7 @@ pipeline {
             }
         }
 
-        /*stage('deploy to EC2') {
+    /*  stage('deploy to EC2') {
             steps {
                 script {
                    echo 'deploying docker image to EC2...'
@@ -70,8 +70,8 @@ pipeline {
                    }
                 }
             }
-        }*/
-        
+        }   */
+
         stage('commit version update') {
             steps {
                 script {
