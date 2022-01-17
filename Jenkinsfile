@@ -22,7 +22,7 @@ pipeline {
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
                     def version = sh 'node -p -e "require('./package.json').version"'
-                    env.IMAGE_NAME = "hichemdalleji/pfe-chat-app:$version-$BUILD_NUMBER"
+                    env.IMAGE_NAME = "hichemdalleji/pfe-chat-app:${version}-${BUILD_NUMBER}"
                     sh "echo ${IMAGE_NAME}" 
                 }
             }
