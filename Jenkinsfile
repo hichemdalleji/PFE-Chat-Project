@@ -27,6 +27,16 @@ pipeline {
                 }
             }
         }
+
+        /*stage('build app') {
+            steps {
+               script {
+                  echo 'building the chat app...'
+                  buildNpm()
+               }
+            }
+        }*/
+
         stage('build image') {
             steps {
                 script {
@@ -44,6 +54,7 @@ pipeline {
                 }
             }
         }
+
         /*stage('deploy to EC2') {
             steps {
                 script {
@@ -60,6 +71,7 @@ pipeline {
                 }
             }
         }*/
+        
         stage('commit version update') {
             steps {
                 script {
