@@ -22,7 +22,7 @@ pipeline {
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
                     def version = sh 'node -p -e "require('./package.json').version"'
-                    env.IMAGE_NAME = "hichemdalleji/pfe-chat-app:${version}-${BUILD_NUMBER}"
+                    env.IMAGE_NAME = "${version}-${BUILD_NUMBER}"
                     sh "echo ${IMAGE_NAME}" 
                 }
             }
@@ -75,7 +75,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     // git config here for the first time run
                     sh 'git config --global user.email "jenkins@example.com"'
-                    sh 'git config --global user.name "jenkins"'
+                    sh 'git config --global user.name "jenkins"
                     sh "git remote set-url origin https://${USER}:${PASS}@github.com/hichemdalleji/PFE-Chat-Project.git"
                     sh 'git add .'
                     sh 'git commit -m "ci: version bump"'
