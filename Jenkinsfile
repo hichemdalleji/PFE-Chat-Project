@@ -18,11 +18,11 @@ pipeline {
             steps {
                 script {
                     echo 'incrementing app version...'
-                    sh 'npm version patch --no-git-tag-version > version.txt' //other options are "major" or "minor"
+                    sh 'npm version major --no-git-tag-version' //other options are "major" or "minor"
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
-                    def version = sh 'cat version.txt'
-                    env.IMAGE_NAME = "pfe-chat$version-$BUILD_NUMBER"
+                    def version = sh "grep version package.json | sed 's/.*"version": "\(.*\)".*/\1/'"
+                    env.IMAGE_NAME = "hichemdalleji/pfe-chat-app:$version-$BUILD_NUMBER"
                     sh "echo ${IMAGE_NAME}" 
                 }
             }
