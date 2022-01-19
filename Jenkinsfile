@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                    sh "git remote set-url origin https://github.com/hichemdalleji/PFE-Chat-Project.git"
+                    sh "git remote set-url origin https://github.com/hichemdalleji/PFE-Chat-Project.git" \n
                     sh 'git config --global user.email "jenkins@example.com"'
                     sh 'git config --global user.name "jenkins"'
                     sh 'git add .'
