@@ -12,7 +12,6 @@ pipeline {
     tools {
         nodejs 'NodeJS'
     }
-
     stages {
         stage('increment version') {
             steps {
@@ -27,8 +26,6 @@ pipeline {
                 }
             }
         }
-
-
         stage('build image') {
             steps {
                 script {
@@ -46,21 +43,5 @@ pipeline {
                 }
             }
         }
-
-
-        /* stage('commit version update') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                    sh 'git config --global user.email "jenkins@example.com"'
-                    sh 'git config --global user.name "jenkins"'
-                    sh "git remote set-url origin http://${PASS}${USER}@github.com/hichemdalleji/PFE-Chat-Project.git"
-                    sh 'git add .'
-                    sh 'git commit -m "ci: version bump"'
-                    sh 'git push origin HEAD:master'
-                    }
-                }
-            }
-        } */
     }
 }
