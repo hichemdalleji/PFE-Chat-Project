@@ -20,7 +20,7 @@ pipeline {
                     sh 'npm version major --no-git-tag-version' //other options are "major" or "minor"
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
-                    def version = sh 'node -p -e "require('./package.json').version"'
+                    def version = sh './version.sh'
                     env.IMAGE_NAME = "${version}-${BUILD_NUMBER}"
                     sh "echo ${IMAGE_NAME}" 
                 }
@@ -43,6 +43,19 @@ pipeline {
                 }
             }
         }
+        /* stage('commit version update') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh 'git config --global user.email "jenkins@example.com"'
+                    sh 'git config --global user.name "jenkins"'
+                    sh "git remote set-url origin http://${PASS}${USER}@github.com/hichemdalleji/PFE-Chat-Project.git"
+                    sh 'git add .'
+                    sh 'git commit -m "ci: version bump"'
+                    sh 'git push origin HEAD:master'
+                    }
+                }
+            }
+        } */
     }
-
 }
