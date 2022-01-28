@@ -20,7 +20,7 @@ pipeline {
                     sh 'npm version major --no-git-tag-version' //other options are "major" or "minor"
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
-                    sh 'sudo chmod 777 version.sh'
+                    sh 'chmod 777 version.sh'
                     def version = sh './version.sh'
                     env.IMAGE_NAME = "${version}-${BUILD_NUMBER}"
                     sh "echo ${IMAGE_NAME}" 
