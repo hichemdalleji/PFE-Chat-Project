@@ -6,7 +6,8 @@
      credentialsId: 'github-shared-lib'
     ]
 )*/
-@Library ('jenkins-shared-lib')_ //If the library is global, underscore is added to separate lib from pipeline
+/* groovylint-disable-next-line CompileStatic */
+@Library ('jenkins-shared-lib') //If the library is global, underscore is added to separate lib from pipeline
 
 pipeline {
     agent any
@@ -24,7 +25,7 @@ pipeline {
                     //sh 'chmod 777 version.sh'
                     sh "chmod 777 version.sh"
                     APPL_VERSION = sh(
-                        script: "./version.sh"
+                        script: "./version.sh",
                         returnStdout: true
                     ).trim()
 
