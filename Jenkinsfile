@@ -5,8 +5,9 @@
      remote: 'git@github.com:hichemdalleji/Jenkins-Shared-Library.git',
      credentialsId: 'github-shared-lib'
     ]
-)*/ 
-@Library ('jenkins-shared-lib')_ //If the library is global, underscore is added to separate lib from pipeline 
+)*/
+@Library ('jenkins-shared-lib')_ //If the library is global, underscore is added to separate lib from pipeline
+
 pipeline {
     agent any
     tools {
@@ -20,10 +21,15 @@ pipeline {
                     sh 'npm version major --no-git-tag-version' //other options are "major" or "minor"
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
-                    sh 'chmod 777 version.sh'
-                    def version = sh './version.sh'
+                    //sh 'chmod 777 version.sh'
+
+                    APP_VERSION = sh(
+                        script: 'echo node -p -e "require('./package.json').version"'
+                        returnStdout: true
+                    ).trim()
+
                     env.IMAGE_NAME = "${version}-${BUILD_NUMBER}"
-                    sh "echo ${IMAGE_NAME}" 
+                    sh "echo ${IMAGE_NAME}"
                 }
             }
         }
@@ -43,18 +49,23 @@ pipeline {
                    dockerPush(env.IMAGE_NAME)
                 }
             }
-        }
+              }
         /* stage('commit version update') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'github-credentials',
+                        passwordVariable: 'PASS',
+                        sernameVariable: 'USER'
+                    )])
+                {
                     sh 'git config --global user.email "jenkins@example.com"'
                     sh 'git config --global user.name "jenkins"'
                     sh "git remote set-url origin http://${PASS}${USER}@github.com/hichemdalleji/PFE-Chat-Project.git"
                     sh 'git add .'
                     sh 'git commit -m "ci: version bump"'
                     sh 'git push origin HEAD:master'
-                    }
+                }
                 }
             }
         } */
