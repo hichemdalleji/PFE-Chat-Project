@@ -1,2 +1,2 @@
 #!/bin/sh
-echo node -p -e "require('./package.json').version"
+node -p -e "require('./package.json').version"

@@ -6,7 +6,7 @@
      credentialsId: 'github-shared-lib'
     ]
 )*/
-/* groovylint-disable-next-line CompileStatic */
+
 @Library ('jenkins-shared-lib')_ //If the library is global, underscore is added to separate lib from pipeline
 
 pipeline {
