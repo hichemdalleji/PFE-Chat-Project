@@ -22,9 +22,9 @@ pipeline {
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
                     //sh 'chmod 777 version.sh'
-
+                    sh "chmod 777 version.sh"
                     env.APPL_VERSION = sh(
-                        script: "echo node -p -e "require('./package.json').version""
+                        script: "./version.sh"
                         returnStdout: true
                     ).trim()
 
