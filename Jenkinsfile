@@ -28,7 +28,7 @@ pipeline {
                         returnStdout: true
                     ).trim()
 
-                    env.IMAGE_NAME = "${version}-${BUILD_NUMBER}"
+                    env.IMAGE_NAME = "${APP_VERSION}-${BUILD_NUMBER}"
                     sh "echo ${IMAGE_NAME}"
                 }
             }
