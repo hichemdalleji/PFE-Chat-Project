@@ -7,7 +7,7 @@
     ]
 )*/
 /* groovylint-disable-next-line CompileStatic */
-@Library ('jenkins-shared-lib') //If the library is global, underscore is added to separate lib from pipeline
+@Library ('jenkins-shared-lib')_ //If the library is global, underscore is added to separate lib from pipeline
 
 pipeline {
     agent any
@@ -23,9 +23,9 @@ pipeline {
                     //sh 'npm version > version.txt'
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
                     //sh 'chmod 777 version.sh'
-                    sh "chmod 777 version.sh"
+                    sh 'chmod 777 version.sh'
                     APPL_VERSION = sh(
-                        script: "./version.sh",
+                        script: './version.sh',
                         returnStdout: true
                     ).trim()
 
