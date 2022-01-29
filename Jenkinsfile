@@ -23,12 +23,12 @@ pipeline {
                     //def matcher = readFile('version.txt') =~ '"ChatProject":(.+)'
                     //sh 'chmod 777 version.sh'
 
-                    APP_VERSION = sh(
-                        script: 'echo node -p -e "require('./package.json').version"'
+                    env.APPL_VERSION = sh(
+                        script: "echo node -p -e "require('./package.json').version""
                         returnStdout: true
                     ).trim()
 
-                    env.IMAGE_NAME = "${APP_VERSION}-${BUILD_NUMBER}"
+                    env.IMAGE_NAME = "${APPL_VERSION}-${BUILD_NUMBER}"
                     sh "echo ${IMAGE_NAME}"
                 }
             }
